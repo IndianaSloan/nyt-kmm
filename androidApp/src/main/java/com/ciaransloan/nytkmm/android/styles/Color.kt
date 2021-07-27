@@ -2,7 +2,14 @@ package com.ciaransloan.nytkmm.android.styles
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+val ColorPrimary = Color(0xFF000000)
+val ColorSecondary = Color(0xFFCACAD7)
+val ColorBackground = Color(0xFFE5E5E5)
+val ColorSurface = Color(0xFFFFFFFF)
+
+val ColorOnSurface = Color(0xFF000000)
+val ColorOnBackground = Color(0xFF000000)
+val ColorOnPrimary = Color(0xFFFFFFFF)
+val ColorOnSecondary = Color(0xFFFFFFFF)
+
+val ColorCaption = Color(0xFF595959)

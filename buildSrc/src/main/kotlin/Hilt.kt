@@ -4,5 +4,5 @@ object Hilt {
 
     const val HiltAndroid = "com.google.dagger:hilt-android:$version"
     const val HiltCompiler = "com.google.dagger:hilt-compiler:$version"
-    const val HiltNavigation = "androidx.hilt:hilt-navigation:$navigationVersion"
+    const val HiltNavigation = "androidx.hilt:hilt-navigation-compose:$navigationVersion"
 }

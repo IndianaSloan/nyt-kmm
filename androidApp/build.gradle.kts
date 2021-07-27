@@ -59,6 +59,7 @@ dependencies {
 
     implementation(Accompanist.Coil)
     implementation(Accompanist.Pager)
+    implementation(Accompanist.SystemUIController)
 
     implementation(Androidx.AppCompat)
     implementation(Androidx.LifecycleRuntime)
@@ -77,6 +78,8 @@ dependencies {
     implementation(Compose.Runtime)
     implementation(Compose.UI)
     implementation(Compose.UITooling)
+
+    implementation(Google.Gson)
 
     implementation(Hilt.HiltAndroid)
     implementation(Hilt.HiltNavigation)
