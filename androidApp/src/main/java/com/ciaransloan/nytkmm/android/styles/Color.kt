@@ -13,3 +13,4 @@ val ColorOnPrimary = Color(0xFFFFFFFF)
 val ColorOnSecondary = Color(0xFFFFFFFF)
 
 val ColorCaption = Color(0xFF595959)
+val ColorSubtitle = Color(0xFFC0C0C0)

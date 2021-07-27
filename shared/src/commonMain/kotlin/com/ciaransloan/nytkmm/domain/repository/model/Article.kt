@@ -10,5 +10,6 @@ data class Article(
     val description: String,
     val postedDate: Long,
     val webUrl: String,
-    val thumbnailUrl: String ? = null
+    val thumbnailUrl: String ? = null,
+    val isFavorite: Boolean
 )

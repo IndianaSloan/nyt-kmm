@@ -16,9 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import com.ciaransloan.nytkmm.android.styles.ColorPrimary
 import com.ciaransloan.nytkmm.android.styles.ColorSecondary
+import com.ciaransloan.nytkmm.android.styles.Dimens
 
 data class BottomBarItem(
     val title: String,
@@ -29,13 +29,7 @@ data class BottomBarItem(
 @Composable
 fun BottomBar(items: List<BottomBarItem>, onClick: (Int) -> Unit = {}) {
     val selectedIndex = remember { mutableStateOf(0) }
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp),
-        backgroundColor = Color.White,
-        elevation = 16.dp
-    ) {
+    Card(modifier = Styles.Card, backgroundColor = Color.White, elevation = Dimens.ElevationLarge) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
@@ -70,4 +64,10 @@ fun BottomBarIcon(
         colorFilter = ColorFilter.tint(if (isSelected) ColorPrimary else ColorSecondary),
         modifier = modifier.clickable { onClick(index) }
     )
+}
+
+private object Styles {
+    val Card: Modifier = Modifier
+        .fillMaxWidth()
+        .height(Dimens.ToolbarHeight)
 }

@@ -8,6 +8,8 @@ object Dimens {
     val ArticleThumb = 110.dp
 
     val ElevationSmall = 2.dp
+    val ElevationMedium = 6.dp
+    val ElevationLarge = 16.dp
 
     val RadiusDefault = 6.dp
 
@@ -15,6 +17,9 @@ object Dimens {
     val PaddingHalf = 8.dp
     val PaddingDefault = 16.dp
 
+    val TextSizeXSmall = 12.sp
     val TextSizeSmall = 14.sp
     val TextSizeMed = 16.sp
+
+    val ToolbarHeight = 56.dp
 }

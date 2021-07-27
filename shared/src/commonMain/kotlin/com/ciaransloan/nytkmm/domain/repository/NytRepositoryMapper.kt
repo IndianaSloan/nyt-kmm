@@ -18,14 +18,17 @@ internal class NytRepositoryMapper : BaseMapper() {
     }
 
     fun mapArticles(items: List<ArticleApiModel>): List<Article> {
-        return items.mapNotNull {
+        return items.mapNotNull { apiModel ->
+            val imageUrl =
+                apiModel.multimedia?.firstOrNull { it.format == "Normal" && it.type == "image" }?.url
             Article(
-                id = it.id ?: return@mapNotNull null,
-                title = it.title ?: return@mapNotNull null,
-                description = it.abstract ?: "",
+                id = apiModel.id ?: return@mapNotNull null,
+                title = apiModel.title ?: return@mapNotNull null,
+                description = apiModel.abstract ?: "",
                 postedDate = 0L,
-                thumbnailUrl = it.thumbnailUrl,
-                webUrl = it.url ?: return@mapNotNull null
+                thumbnailUrl = imageUrl ?: apiModel.thumbnailUrl,
+                webUrl = apiModel.url ?: return@mapNotNull null,
+                isFavorite = false
             )
         }
     }

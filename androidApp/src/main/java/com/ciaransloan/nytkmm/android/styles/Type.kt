@@ -27,5 +27,11 @@ val Typography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = Dimens.TextSizeSmall,
         color = ColorCaption
-    )
+    ),
+    subtitle2 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = Dimens.TextSizeXSmall,
+        color = ColorSubtitle
+    ),
 )

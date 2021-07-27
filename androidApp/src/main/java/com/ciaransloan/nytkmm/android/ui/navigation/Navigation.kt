@@ -9,33 +9,31 @@ import com.ciaransloan.nytkmm.android.R
 import com.ciaransloan.nytkmm.android.ui.article.ArticleListScreen
 import com.ciaransloan.nytkmm.android.ui.components.BottomBar
 import com.ciaransloan.nytkmm.android.ui.components.BottomBarItem
+import com.ciaransloan.nytkmm.android.ui.components.NytToolbar
 import com.ciaransloan.nytkmm.domain.repository.model.NewsSection
 import com.google.gson.Gson
 
 @Composable
 fun Navigation(gson: Gson) {
     val navController = rememberNavController()
-    val newSections = listOf(
-        NewsSection("all", "All"),
-        NewsSection("books", "Books"),
-        NewsSection("travel", "Travel")
-    )
-    Scaffold(bottomBar = {
-        BottomBar(bottomBarItems) { i -> navController.navigate(bottomBarItems[i].screenRoute) }
-    }) {
-        NavHost(navController = navController, startDestination = Screen.ArticleList.route) {
-            composable(route = Screen.ArticleList.route) { ArticleListScreen() }
-            composable(
-                route = Screen.ArticleListSection.route,
-                Screen.ArticleListSection.args
-            ) { backStackEntry ->
-                val section = backStackEntry.arguments?.getString("section")?.let { json ->
-                    gson.fromJson(json, NewsSection::class.java)
+    Scaffold(
+        topBar = { NytToolbar() },
+        bottomBar = { BottomBar(bottomBarItems) { i -> navController.navigate(bottomBarItems[i].screenRoute) } },
+        content = {
+            NavHost(navController = navController, startDestination = Screen.ArticleList.route) {
+                composable(route = Screen.ArticleList.route) { ArticleListScreen() }
+                composable(
+                    route = Screen.ArticleListSection.route,
+                    Screen.ArticleListSection.args
+                ) { backStackEntry ->
+                    val section = backStackEntry.arguments?.getString("section")?.let { json ->
+                        gson.fromJson(json, NewsSection::class.java)
+                    }
+                    ArticleListScreen(section)
                 }
-                ArticleListScreen(section)
             }
         }
-    }
+    )
 }
 
 val bottomBarItems = listOf(

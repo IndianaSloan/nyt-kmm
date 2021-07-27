@@ -20,5 +20,13 @@ data class ArticleApiModel(
     val publishedDate: String? = null,
     @SerialName("thumbnail_standard")
     val thumbnailUrl: String? = null,
-    val url: String? = null
+    val url: String? = null,
+    val multimedia: List<ArticleMediaApiModel>? = null
+)
+
+@Serializable
+data class ArticleMediaApiModel(
+    val url: String? = null,
+    val format: String? = null,
+    val type: String? = null
 )

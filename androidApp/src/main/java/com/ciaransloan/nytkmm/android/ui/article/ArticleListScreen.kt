@@ -1,7 +1,7 @@
 package com.ciaransloan.nytkmm.android.ui.article
 
+import android.content.Intent
 import android.widget.Toast
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -17,20 +17,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.LocalImageLoader
 import coil.compose.rememberImagePainter
 import com.ciaransloan.nytkmm.android.R
-import com.ciaransloan.nytkmm.android.styles.ColorBackground
-import com.ciaransloan.nytkmm.android.styles.ColorPrimary
-import com.ciaransloan.nytkmm.android.styles.Dimens
-import com.ciaransloan.nytkmm.android.styles.Typography
+import com.ciaransloan.nytkmm.android.styles.*
+import com.ciaransloan.nytkmm.android.ui.components.ImageDrawable
 import com.ciaransloan.nytkmm.android.ui.components.ProgressMask
 import com.ciaransloan.nytkmm.domain.repository.model.Article
 import com.ciaransloan.nytkmm.domain.repository.model.NewsSection
@@ -39,11 +34,14 @@ import com.ciaransloan.nytkmm.presentation.article.model.ArticleListState
 @Composable
 fun ArticleListScreen(section: NewsSection? = null) {
     val viewModel: ArticleListViewModel = hiltViewModel()
-    val uiState = viewModel.uiState.collectAsState()
-
     val context = LocalContext.current
 
-    uiState.value
+    DisposableEffect(key1 = viewModel) {
+        viewModel.setSection(section)
+        onDispose { }
+    }
+
+    val uiState = viewModel.uiState.collectAsState()
     val data = when (val model = uiState.value) {
         is ArticleListState.Content -> model.items
         is ArticleListState.Loading -> {
@@ -53,25 +51,46 @@ fun ArticleListScreen(section: NewsSection? = null) {
         else -> emptyList()
     }
 
-    ArticleList(items = data, onClicked = {
-        Toast.makeText(context, it.title, Toast.LENGTH_SHORT).show()
-    })
-
-    DisposableEffect(key1 = viewModel) {
-        viewModel.setSection(section)
-        onDispose { }
-    }
+    ArticleList(
+        items = data,
+        onClicked = { Toast.makeText(context, it.title, Toast.LENGTH_SHORT).show() },
+        onBookmarkClicked = {  },
+        onShareClicked = { webUrl ->
+            Intent(Intent.ACTION_SEND).apply {
+                putExtra(Intent.EXTRA_TEXT, webUrl)
+                type = "text/plain"
+                context.startActivity(this)
+            }
+        }
+    )
 }
 
 @Composable
-fun ArticleList(items: List<Article>, onClicked: (item: Article) -> Unit) {
+private fun ArticleList(
+    items: List<Article>,
+    onClicked: (Article) -> Unit,
+    onBookmarkClicked: (Article) -> Unit,
+    onShareClicked: (String) -> Unit
+) {
     LazyColumn {
-        items(items) { ArticleListItem(article = it, onClicked = onClicked) }
+        items(items) {
+            ArticleListItem(
+                article = it,
+                onClicked = onClicked,
+                onBookmarkClicked = onBookmarkClicked,
+                onShareClicked = onShareClicked
+            )
+        }
     }
 }
 
 @Composable
-private fun ArticleListItem(article: Article, onClicked: (item: Article) -> Unit) {
+private fun ArticleListItem(
+    article: Article,
+    onClicked: (Article) -> Unit,
+    onBookmarkClicked: (Article) -> Unit,
+    onShareClicked: (String) -> Unit
+) {
     Card(
         modifier = Styles.ArticleCard.clickable { onClicked(article) },
         elevation = Dimens.ElevationSmall
@@ -103,37 +122,32 @@ private fun ArticleListItem(article: Article, onClicked: (item: Article) -> Unit
             ) {
                 Text(
                     text = "26 July",
-                    style = Typography.caption,
+                    style = Typography.subtitle2,
                     modifier = Modifier.absolutePadding(right = Dimens.PaddingHalf),
                     textAlign = TextAlign.Left
                 )
-                DrawableImage(resId = R.drawable.ic_bookmark)
-                DrawableImage(resId = R.drawable.ic_share)
+                ImageDrawable(
+                    resId = R.drawable.ic_bookmark,
+                    tint = if (article.isFavorite) ColorPrimary else ColorSecondary
+                ) { onBookmarkClicked(article) }
+                ImageDrawable(resId = R.drawable.ic_share) { onShareClicked(article.webUrl) }
             }
         }
     }
 }
 
-@Composable
-fun DrawableImage(@DrawableRes resId: Int) {
-    Image(
-        painter = painterResource(resId),
-        contentDescription = "",
-        colorFilter = ColorFilter.tint(ColorPrimary),
-        modifier = Modifier.absolutePadding(left = Dimens.PaddingHalf, right = Dimens.PaddingHalf)
-    )
-}
+
 
 @Composable
-fun ArticleImage(article: Article) {
+private fun ArticleImage(article: Article) {
     Image(
         painter = rememberImagePainter(
             data = article.thumbnailUrl,
             imageLoader = LocalImageLoader.current,
             builder = {
                 placeholder(R.drawable.image_placholder)
-                fallback(R.drawable.image_placholder)
-                error(R.drawable.image_placholder)
+                fallback(R.drawable.img_placeholder)
+                error(R.drawable.img_placeholder)
             }
         ),
         contentDescription = null,
