@@ -25,7 +25,7 @@ private struct ArticleListItem: View {
     var article: Article
     var body: some View {
         HStack(alignment: .top) {
-            ImageView(withURL: article.getImageUrl() ?? "").frame(width: 50, height: 50, alignment: .center)
+            ImageView(withURL: article.thumbnailUrl ?? "").frame(width: 50, height: 50, alignment: .center)
             Text(article.title).font(.system(size: 12).bold())
         }
     }

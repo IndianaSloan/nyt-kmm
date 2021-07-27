@@ -19,21 +19,14 @@ internal class NytRepositoryMapper : BaseMapper() {
 
     fun mapArticles(items: List<ArticleApiModel>): List<Article> {
         return items.mapNotNull {
-            when (it.thumbnailUrl.isNullOrEmpty()) {
-                true -> Article.NoImage(
-                    id = it.id ?: return@mapNotNull null,
-                    title = it.title ?: return@mapNotNull null,
-                    postedDate = 0L,
-                    webUrl = it.url ?: return@mapNotNull null
-                )
-                false -> Article.WithImage(
-                    id = it.id ?: return@mapNotNull null,
-                    title = it.title ?: return@mapNotNull null,
-                    postedDate = 0L,
-                    thumbnailUrl = it.thumbnailUrl,
-                    webUrl = it.url ?: return@mapNotNull null
-                )
-            }
+            Article(
+                id = it.id ?: return@mapNotNull null,
+                title = it.title ?: return@mapNotNull null,
+                description = it.abstract ?: "",
+                postedDate = 0L,
+                thumbnailUrl = it.thumbnailUrl,
+                webUrl = it.url ?: return@mapNotNull null
+            )
         }
     }
 }

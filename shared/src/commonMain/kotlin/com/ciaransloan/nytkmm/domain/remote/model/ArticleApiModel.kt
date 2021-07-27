@@ -15,6 +15,7 @@ data class ArticleApiModel(
     @SerialName("slug_name")
     val id: String? = null,
     val title: String? = null,
+    val abstract: String? = null,
     @SerialName("published_date")
     val publishedDate: String? = null,
     @SerialName("thumbnail_standard")
