@@ -11,16 +11,20 @@ import shared
 
 struct HomeScreen: View {
     var body: some View {
-        Toolbar()
-        TabView {
-            ArticleListScreenFactory()
-                .tabItem {
-                    Image(systemName: "house.fill")
+        NavigationView {
+            VStack {
+                Toolbar()
+                TabView {
+                    ArticleListScreenFactory()
+                        .tabItem {
+                            Image(systemName: "house.fill")
+                        }.navigationBarHidden(true)
+                    ArticleListScreenFactory(section: SectionUIModel(id: "travel", title: "Travel"))
+                        .tabItem {
+                            Image(systemName: "video.circle.fill")
+                        }.navigationBarHidden(true)
                 }
-            ArticleListScreenFactory(section: SectionUIModel(id: "travel", title: "Travel"))
-                .tabItem {
-                    Image(systemName: "video.circle.fill")
-                }
+            }.navigationBarHidden(true)
         }
     }
 }
