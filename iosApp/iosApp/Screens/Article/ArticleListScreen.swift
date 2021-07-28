@@ -11,6 +11,11 @@ struct ArticleListScreen: View {
                     ForEach((uiState as! ArticleListState.Content).items, id: \.self) { uiModel in
                         ArticleListItem(article: uiModel)
                             .padding(EdgeInsets(top: 8, leading: 8, bottom: 0, trailing: 8))
+                            .onAppear {
+                                if (uiModel == (uiState as! ArticleListState.Content).items.last) {
+                                    viewModel.onScrolledToLastItem()
+                                }
+                            }
                     }
                 }
             } else if (uiState.isKind(of: ArticleListState.Loading.self)) {
@@ -37,7 +42,9 @@ private struct ArticleListItem: View {
                 Text(article.description_).font(.custom("CormorantGaramond-Regular", size: 14))
                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 16))
             }
-        }.background(Color.white).cornerRadius(9).shadow(color: .gray, radius: 1, x: 0.0, y: 0.0)
+        }.background(AppColors.ColorSurface)
+        .cornerRadius(9)
+        .shadow(radius: 2)
     }
 }
 
@@ -58,6 +65,10 @@ class ArticleListViewModel: ObservableObject {
     
     deinit {
         stateWatcher?.close()
+    }
+    
+    func onScrolledToLastItem() {
+        stateManager.loadNextPage()
     }
 }
 

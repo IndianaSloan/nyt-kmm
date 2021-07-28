@@ -390,6 +390,7 @@
 			baseConfigurationReference = 941BFEA85E0A4EDD2D4EB896 /* Pods-iosApp.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KF4VR58THK;
 				ENABLE_PREVIEWS = YES;
 				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = iosApp/Info.plist;
@@ -410,6 +411,7 @@
 			baseConfigurationReference = 6F183461722B3AF7253E8A33 /* Pods-iosApp.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KF4VR58THK;
 				ENABLE_PREVIEWS = YES;
 				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = iosApp/Info.plist;

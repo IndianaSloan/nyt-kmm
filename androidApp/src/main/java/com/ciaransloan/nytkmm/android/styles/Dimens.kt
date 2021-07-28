@@ -15,6 +15,7 @@ object Dimens {
 
     val PaddingFourth = 4.dp
     val PaddingHalf = 8.dp
+    val PaddingTwoThirds = 12.dp
     val PaddingDefault = 16.dp
 
     val TextSizeXSmall = 12.sp

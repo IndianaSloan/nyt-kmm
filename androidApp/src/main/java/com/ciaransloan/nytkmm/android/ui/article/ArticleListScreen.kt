@@ -110,13 +110,15 @@ private fun ArticleListItem(
                 Spacer(modifier = Modifier.width(Dimens.PaddingHalf))
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(text = article.title, style = Typography.h1)
+                    Spacer(modifier = Modifier.height(Dimens.PaddingTwoThirds))
                     Divider(
-                        color = ColorBackground,
+                        color = ColorOnBackground,
                         modifier = Modifier.absolutePadding(
                             top = Dimens.PaddingFourth,
                             bottom = Dimens.PaddingFourth
                         )
                     )
+                    Spacer(modifier = Modifier.height(Dimens.PaddingTwoThirds))
                     Text(text = article.description, style = Typography.caption)
                 }
             }

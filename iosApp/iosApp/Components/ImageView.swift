@@ -21,12 +21,13 @@ struct ImageView: View {
         Image(uiImage: image)
             .resizable()
             .scaledToFill()
-            .frame(width:110, height:100, alignment: .center)
+            .frame(width:110, height:110, alignment: .center)
             .clipped()
             .cornerRadius(6)
             .onReceive(imageLoader.$data) { data in
                 guard let data = data else { return }
                 self.image = UIImage(data: data) ?? UIImage()
-            }.onAppear(perform: { self.imageLoader.loadImage() })
+            }
+            .onAppear(perform: { self.imageLoader.loadImage() })
     }
 }
