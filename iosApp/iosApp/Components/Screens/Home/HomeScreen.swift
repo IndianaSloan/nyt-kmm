@@ -11,7 +11,6 @@ import shared
 
 struct HomeScreen: View {
     var body: some View {
-        Toolbar()
         TabView {
             ArticleListScreenFactory()
                 .tabItem {

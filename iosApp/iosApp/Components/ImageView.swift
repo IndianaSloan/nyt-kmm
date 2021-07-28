@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ImageView: View {
     @ObservedObject var imageLoader: ImageLoader
-    @State var image: UIImage = UIImage(named: "image_placholder")!
+    @State var image: UIImage = UIImage(named: "img_placeholder")!
     
     init(withURL url: String) {
         imageLoader = ImageLoader(urlString: url)
@@ -24,8 +24,9 @@ struct ImageView: View {
             .frame(width:110, height:100, alignment: .center)
             .clipped()
             .cornerRadius(6)
-            .onReceive(imageLoader.didChange) { data in
+            .onReceive(imageLoader.$data) { data in
+                guard let data = data else { return }
                 self.image = UIImage(data: data) ?? UIImage()
-            }
+            }.onAppear(perform: { self.imageLoader.loadImage() })
     }
 }
