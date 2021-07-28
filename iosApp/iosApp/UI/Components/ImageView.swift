@@ -21,9 +21,9 @@ struct ImageView: View {
         Image(uiImage: image)
             .resizable()
             .scaledToFill()
-            .frame(width:110, height:110, alignment: .center)
+            .frame(width: Dimens.ArticleThumb, height: Dimens.ArticleThumb)
             .clipped()
-            .cornerRadius(6)
+            .cornerRadius(Dimens.RadiusMedium)
             .onReceive(imageLoader.$data) { data in
                 guard let data = data else { return }
                 self.image = UIImage(data: data) ?? UIImage()

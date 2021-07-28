@@ -12,7 +12,7 @@ struct Toolbar: View {
     var body: some View {
         ZStack {
             Image("img_toolbar")
-        }.frame(height: 56, alignment: .center)
+        }.frame(height: Dimens.ToolbarHeight, alignment: .center)
     }
 }
 
