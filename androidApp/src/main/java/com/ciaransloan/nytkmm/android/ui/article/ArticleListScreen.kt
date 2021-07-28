@@ -1,12 +1,14 @@
 package com.ciaransloan.nytkmm.android.ui.article
 
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
@@ -27,12 +29,12 @@ import com.ciaransloan.nytkmm.android.R
 import com.ciaransloan.nytkmm.android.styles.*
 import com.ciaransloan.nytkmm.android.ui.components.ImageDrawable
 import com.ciaransloan.nytkmm.android.ui.components.ProgressMask
-import com.ciaransloan.nytkmm.domain.repository.model.Article
-import com.ciaransloan.nytkmm.domain.repository.model.NewsSection
 import com.ciaransloan.nytkmm.presentation.article.model.ArticleListState
+import com.ciaransloan.nytkmm.presentation.article.model.ArticleUIModel
+import com.ciaransloan.nytkmm.presentation.section.model.SectionUIModel
 
 @Composable
-fun ArticleListScreen(section: NewsSection? = null) {
+fun ArticleListScreen(section: SectionUIModel? = null) {
     val viewModel: ArticleListViewModel = hiltViewModel()
     val context = LocalContext.current
 
@@ -54,28 +56,32 @@ fun ArticleListScreen(section: NewsSection? = null) {
     ArticleList(
         items = data,
         onClicked = { Toast.makeText(context, it.title, Toast.LENGTH_SHORT).show() },
-        onBookmarkClicked = {  },
+        onBookmarkClicked = { },
         onShareClicked = { webUrl ->
             Intent(Intent.ACTION_SEND).apply {
                 putExtra(Intent.EXTRA_TEXT, webUrl)
                 type = "text/plain"
                 context.startActivity(this)
             }
-        }
+        },
+        onScrolledToEnd = { viewModel.onPageScrolledToEnd() }
     )
 }
 
 @Composable
 private fun ArticleList(
-    items: List<Article>,
-    onClicked: (Article) -> Unit,
-    onBookmarkClicked: (Article) -> Unit,
-    onShareClicked: (String) -> Unit
+    items: List<ArticleUIModel>,
+    onClicked: (ArticleUIModel) -> Unit,
+    onBookmarkClicked: (ArticleUIModel) -> Unit,
+    onShareClicked: (String) -> Unit,
+    onScrolledToEnd: () -> Unit
 ) {
-    LazyColumn {
-        items(items) {
+    val listState = rememberLazyListState()
+    LazyColumn(state = listState) {
+        itemsIndexed(items) { index, uiItem ->
+            if (index == items.lastIndex) onScrolledToEnd()
             ArticleListItem(
-                article = it,
+                article = uiItem,
                 onClicked = onClicked,
                 onBookmarkClicked = onBookmarkClicked,
                 onShareClicked = onShareClicked
@@ -86,9 +92,9 @@ private fun ArticleList(
 
 @Composable
 private fun ArticleListItem(
-    article: Article,
-    onClicked: (Article) -> Unit,
-    onBookmarkClicked: (Article) -> Unit,
+    article: ArticleUIModel,
+    onClicked: (ArticleUIModel) -> Unit,
+    onBookmarkClicked: (ArticleUIModel) -> Unit,
     onShareClicked: (String) -> Unit
 ) {
     Card(
@@ -121,7 +127,7 @@ private fun ArticleListItem(
                 horizontalArrangement = Arrangement.End
             ) {
                 Text(
-                    text = "26 July",
+                    text = article.postedDate,
                     style = Typography.subtitle2,
                     modifier = Modifier.absolutePadding(right = Dimens.PaddingHalf),
                     textAlign = TextAlign.Left
@@ -137,9 +143,8 @@ private fun ArticleListItem(
 }
 
 
-
 @Composable
-private fun ArticleImage(article: Article) {
+private fun ArticleImage(article: ArticleUIModel) {
     Image(
         painter = rememberImagePainter(
             data = article.thumbnailUrl,

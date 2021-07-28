@@ -21,8 +21,9 @@ struct ImageView: View {
         Image(uiImage: image)
             .resizable()
             .scaledToFill()
+            .frame(width:110, height:100, alignment: .center)
+            .clipped()
             .cornerRadius(6)
-            .frame(width:50, height:50, alignment: .center)
             .onReceive(imageLoader.didChange) { data in
                 self.image = UIImage(data: data) ?? UIImage()
             }

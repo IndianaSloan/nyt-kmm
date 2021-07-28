@@ -10,7 +10,7 @@ import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 
-object ApiClient {
+internal object ApiClient {
     fun build(): HttpClient = HttpClient {
         default()
     }

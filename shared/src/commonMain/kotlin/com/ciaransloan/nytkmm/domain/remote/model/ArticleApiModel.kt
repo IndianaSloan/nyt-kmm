@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
  * before being pushed to production.
  */
 @Serializable
-data class ArticleApiModel(
+internal data class ArticleApiModel(
     @SerialName("slug_name")
     val id: String? = null,
     val title: String? = null,
@@ -25,7 +25,7 @@ data class ArticleApiModel(
 )
 
 @Serializable
-data class ArticleMediaApiModel(
+internal data class ArticleMediaApiModel(
     val url: String? = null,
     val format: String? = null,
     val type: String? = null

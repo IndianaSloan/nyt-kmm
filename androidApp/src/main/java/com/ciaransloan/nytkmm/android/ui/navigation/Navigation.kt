@@ -10,7 +10,7 @@ import com.ciaransloan.nytkmm.android.ui.article.ArticleListScreen
 import com.ciaransloan.nytkmm.android.ui.components.BottomBar
 import com.ciaransloan.nytkmm.android.ui.components.BottomBarItem
 import com.ciaransloan.nytkmm.android.ui.components.NytToolbar
-import com.ciaransloan.nytkmm.domain.repository.model.NewsSection
+import com.ciaransloan.nytkmm.presentation.section.model.SectionUIModel
 import com.google.gson.Gson
 
 @Composable
@@ -27,7 +27,7 @@ fun Navigation(gson: Gson) {
                     Screen.ArticleListSection.args
                 ) { backStackEntry ->
                     val section = backStackEntry.arguments?.getString("section")?.let { json ->
-                        gson.fromJson(json, NewsSection::class.java)
+                        gson.fromJson(json, SectionUIModel::class.java)
                     }
                     ArticleListScreen(section)
                 }

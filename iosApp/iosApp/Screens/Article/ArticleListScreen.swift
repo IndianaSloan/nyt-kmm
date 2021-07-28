@@ -11,23 +11,35 @@ struct ArticleListScreen: View {
             if (uiState.isKind(of: ArticleListState.Content.self)) {
                 List((uiState as! ArticleListState.Content).items, id: \.id) { article in
                     ArticleListItem(article: article)
-                }
+                }.listStyle(PlainListStyle())
             } else if (uiState.isKind(of: ArticleListState.Loading.self)) {
                 ProgressView()
             } else {
                 Text("No Data")
             }
-        }
+        }.background(Color.gray)
     }
 }
 
 private struct ArticleListItem: View {
     var article: Article
     var body: some View {
-        HStack(alignment: .top) {
-            ImageView(withURL: article.thumbnailUrl ?? "").frame(width: 50, height: 50, alignment: .center)
-            Text(article.title).font(.system(size: 12).bold())
-        }
+        HStack(alignment: .center) {
+            ImageView(withURL: article.thumbnailUrl ?? "").frame(width: 110, height: 110, alignment: .center)
+            VStack(alignment: .leading) {
+                Text(article.title).font(.system(size: 16).bold())
+                Divider()
+                Text(article.description_).font(.system(size: 14))
+            }
+        }.background(Color.white).cornerRadius(3.0).shadow(radius: 2)
+    }
+}
+
+struct ArticleListItem_Previews: PreviewProvider {
+    static var previews: some View {
+        //let item = Article.init(id: "123", title: "Hello Wrold", description: "Some Deets", postedDate: 0, webUrl: "", thumbnailUrl: "", isFavorite: false)
+        //ArticleListItem()
+        Text("Hello World Test")
     }
 }
 

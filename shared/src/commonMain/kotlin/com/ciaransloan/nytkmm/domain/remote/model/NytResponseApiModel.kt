@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NytResponseApiModel<T>(
+internal data class NytResponseApiModel<T>(
     val status: String,
     @SerialName(KEY_NUM_RESULTS)
     val objectCount: Int,

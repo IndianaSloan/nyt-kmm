@@ -40,6 +40,7 @@ android {
     }
 
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -55,6 +56,8 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring(Android.DesugaringLibs)
+
     implementation(project(":shared"))
 
     implementation(Accompanist.Coil)
@@ -76,6 +79,7 @@ dependencies {
     implementation(Compose.MaterialIconsExtended)
     implementation(Compose.Navigation)
     implementation(Compose.Runtime)
+    implementation(Compose.RuntimeLiveData)
     implementation(Compose.UI)
     implementation(Compose.UITooling)
 

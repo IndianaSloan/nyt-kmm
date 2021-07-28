@@ -2,6 +2,7 @@ object Compose {
     const val version = "1.0.0-rc02"
 
     const val Runtime = "androidx.compose.runtime:runtime:${version}"
+    const val RuntimeLiveData = "androidx.compose.runtime:runtime-livedata:${version}"
     const val UI = "androidx.compose.ui:ui:${version}"
     const val Material = "androidx.compose.material:material:${version}"
     const val UITooling = "androidx.compose.ui:ui-tooling:${version}"
