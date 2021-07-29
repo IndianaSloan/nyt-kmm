@@ -16,7 +16,7 @@ import com.ciaransloan.nytkmm.android.styles.Dimens
 fun ImageDrawable(
     @DrawableRes resId: Int,
     tint: Color = ColorSecondary,
-    onClick: () -> Unit
+    onClick: () -> Unit = {}
 ) {
     Image(
         painter = painterResource(resId),

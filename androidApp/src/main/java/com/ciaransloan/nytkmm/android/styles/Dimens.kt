@@ -18,6 +18,8 @@ object Dimens {
     val PaddingTwoThirds = 12.dp
     val PaddingDefault = 16.dp
 
+    val SectionItemHeight = 56.dp
+
     val TextSizeXSmall = 12.sp
     val TextSizeSmall = 14.sp
     val TextSizeMed = 16.sp

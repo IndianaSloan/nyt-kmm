@@ -41,8 +41,13 @@ fun BottomBar(items: List<BottomBarItem>, onClick: (Int) -> Unit = {}) {
                     isSelected = selectedIndex.value == index,
                     modifier = Modifier.weight(1F),
                     onClick = { clickedIndex ->
-                        selectedIndex.value = clickedIndex
-                        onClick(clickedIndex)
+                        when (clickedIndex) {
+                            selectedIndex.value -> return@BottomBarIcon
+                            else -> {
+                                selectedIndex.value = clickedIndex
+                                onClick(clickedIndex)
+                            }
+                        }
                     }
                 )
             }
