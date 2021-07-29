@@ -7,7 +7,7 @@ import com.ciaransloan.nytkmm.domain.repository.base.onSuccess
 import com.ciaransloan.nytkmm.domain.repository.model.Article
 import com.ciaransloan.nytkmm.presentation.article.model.ArticleListState
 import com.ciaransloan.nytkmm.presentation.base.BaseStateManager
-import com.ciaransloan.nytkmm.presentation.section.model.SectionUIMapper
+import com.ciaransloan.nytkmm.presentation.section.SectionUIMapper
 import com.ciaransloan.nytkmm.presentation.section.model.SectionUIModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -26,9 +26,10 @@ class ArticleStateManager : BaseStateManager(), KoinComponent {
 
     fun observeState() = uiState.asStateFlow()
 
-    fun getArticles(section: SectionUIModel?) = launchCoroutineScope {
+    fun getArticles(sectionUIModel: SectionUIModel?) = launchCoroutineScope {
         uiState.value = ArticleListState.Loading
-        repository.getArticlePage(section = sectionUiMapper.mapSection(section))
+        val section = sectionUiMapper.mapSectionUIModel(sectionUIModel)
+        repository.getArticlePage(section = section)
             .onSuccess { page -> handlePageResult(page) }
             .onError { error -> println("ERROR - ${error.message}") }
     }
@@ -47,6 +48,6 @@ class ArticleStateManager : BaseStateManager(), KoinComponent {
         currentPage = page
         loadedPages.add(page)
         val articles = loadedPages.flatMap { it.items }
-        uiState.value = ArticleListState.Content(uiMapper.map(articles), page is Page.HasNextPage)
+        uiState.value = uiMapper.map(articles, page)
     }
 }

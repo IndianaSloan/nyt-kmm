@@ -7,7 +7,7 @@ import com.ciaransloan.nytkmm.domain.repository.NytRepositoryContract
 import com.ciaransloan.nytkmm.domain.repository.NytRepositoryMapper
 import com.ciaransloan.nytkmm.domain.repository.base.PagingRepositoryHelper
 import com.ciaransloan.nytkmm.presentation.article.ArticleUIMapper
-import com.ciaransloan.nytkmm.presentation.section.model.SectionUIMapper
+import com.ciaransloan.nytkmm.presentation.section.SectionUIMapper
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
