@@ -9,7 +9,9 @@ struct ArticleListScreen: View {
             ScrollView {
                 LazyVStack {
                     ForEach((uiState as! ArticleListState.Content).items, id: \.self) { uiModel in
-                        ArticleListItem(article: uiModel)
+                        ArticleListItem(uiModel: uiModel, onShareTap: {
+                            shareContent(webUrl: uiModel.webUrl)
+                        })
                             .padding(PaddingStyles.ArticleListItem)
                             .onAppear {
                                 if (uiModel == (uiState as! ArticleListState.Content).items.last) {
@@ -32,6 +34,12 @@ struct ArticleListScreen: View {
                 EmptyView()
             }
         }
+    }
+    
+    func shareContent(webUrl: String) {
+        guard let data = URL(string: webUrl) else { return }
+        let av = UIActivityViewController(activityItems: [data], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
 }
 
