@@ -27,9 +27,9 @@ struct HomeScreen: View {
                         ArticleListScreenFactory().navigationBarHidden(true)
                     }
 
-                    let tabs = [HomePage(route: .Articles, icon: "homekit", selected: currentRoute == .Articles),
-                                HomePage(route: .Bookmarks, icon: "heart", selected: currentRoute == .Bookmarks),
-                                HomePage(route: .Sections, icon: "waveform", selected: currentRoute == .Sections)]
+                    let tabs = [HomePage(route: .Articles, icon: "ic_all", selected: currentRoute == .Articles),
+                                HomePage(route: .Bookmarks, icon: "ic_bookmark", selected: currentRoute == .Bookmarks),
+                                HomePage(route: .Sections, icon: "ic_menu", selected: currentRoute == .Sections)]
                     
                     BottomTabBar(geometry: geometry, height: Dimens.ToolbarHeight, tabs: tabs) { route in
                         self.router.currentPage = route

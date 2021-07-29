@@ -11,23 +11,25 @@ import SwiftUI
 struct TabBarIcon: View {
     
     let width: CGFloat
-    let systemIconName: String
+    let iconName: String
     let isSelected: Bool
     
     init(width: CGFloat, iconName: String, isSelected: Bool) {
         self.width = width
-        self.systemIconName = iconName
+        self.iconName = iconName
         self.isSelected = isSelected
     }
     
     var body: some View {
         VStack {
-            Image(systemName: systemIconName)
+            Image(iconName)
+                .renderingMode(.template)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: width, height: 24)
                 .padding(.top, 10)
                 .foregroundColor(isSelected ? Color.black : Color.gray)
+                
             Spacer()
         }
     }
