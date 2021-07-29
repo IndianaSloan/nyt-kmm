@@ -1,0 +1,9 @@
+CREATE TABLE bookmarks (
+    id TEXT NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    postedDate INTEGER NOT NULL,
+    webUrl TEXT NOT NULL,
+    thumbnailUrl TEXT NOT NULL,
+    isFavorite INTEGER NOT NULL
+);

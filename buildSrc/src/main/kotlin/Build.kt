@@ -4,4 +4,5 @@ object Build {
     const val BuildTools = "com.android.tools.build:gradle:${buildToolsVersion}"
     const val KotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.version}"
     const val HiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Hilt.version}"
+    const val SqlDelightPlugin = "com.squareup.sqldelight:gradle-plugin:${Squareup.sqlDelightVersion}"
 }

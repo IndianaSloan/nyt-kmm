@@ -8,6 +8,7 @@ buildscript {
         classpath(Build.KotlinGradlePlugin)
         classpath(Build.BuildTools)
         classpath(Build.HiltGradlePlugin)
+        classpath(Build.SqlDelightPlugin)
     }
 }
 

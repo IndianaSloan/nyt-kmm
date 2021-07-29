@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     id(Plugins.AndroidLibrary)
+    id(Plugins.SqlDelight)
 
     kotlin(Kotlin.Plugins.Multiplatform)
     kotlin(Kotlin.Plugins.Cocoapods)
@@ -10,6 +11,15 @@ plugins {
 
 version = Application.VersionName
 group = Application.ApplicationId
+
+android {
+    compileSdk = Application.CompileSdk
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdk = Application.MinSdk
+        targetSdk = Application.TargetSdk
+    }
+}
 
 kotlin {
     android()
@@ -39,26 +49,27 @@ kotlin {
                 implementation(Koin.Core)
                 implementation(Kotlinx.CoroutinesCore)
                 implementation(Kotlinx.DateTime)
+                implementation(Squareup.SqlDelightRuntime)
             }
         }
         val androidMain by getting {
             dependencies {
                 implementation(Ktor.Android)
+                implementation(Squareup.SqlDelightAndroid)
             }
         }
         val iosMain by getting {
             dependencies {
                 implementation(Ktor.iOS)
+                implementation(Squareup.SqlDelightNative)
             }
         }
     }
 }
 
-android {
-    compileSdk = Application.CompileSdk
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = Application.MinSdk
-        targetSdk = Application.TargetSdk
+sqldelight {
+    database("NytDatabase") {
+        packageName = "${Application.ApplicationId}.datasource.cache"
+        sourceFolders = listOf("sqldelight")
     }
 }
