@@ -21,6 +21,9 @@
 		77EC228026AD718700802FAB /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EC227F26AD718700802FAB /* ImageView.swift */; };
 		77EC228426AD71BC00802FAB /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EC228326AD71BC00802FAB /* ImageLoader.swift */; };
 		77EC228726AD7D3600802FAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77EC228626AD7D3600802FAB /* Assets.xcassets */; };
+		77EEF97F26B2982400407155 /* TabBarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EEF97E26B2982400407155 /* TabBarIcon.swift */; };
+		77EEF98126B29A5000407155 /* BottomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EEF98026B29A5000407155 /* BottomTabBar.swift */; };
+		77EEF98426B29D5200407155 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EEF98326B29D5200407155 /* HomePage.swift */; };
 		ACBC31D9E7825940A06E942A /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E54E52B3C11420B1E214EE1 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +45,9 @@
 		77EC227F26AD718700802FAB /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		77EC228326AD71BC00802FAB /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		77EC228626AD7D3600802FAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		77EEF97E26B2982400407155 /* TabBarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarIcon.swift; sourceTree = "<group>"; };
+		77EEF98026B29A5000407155 /* BottomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBar.swift; sourceTree = "<group>"; };
+		77EEF98326B29D5200407155 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		7E54E52B3C11420B1E214EE1 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		941BFEA85E0A4EDD2D4EB896 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +136,8 @@
 		7721ACF226ADEBCB003BAA2B /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				77EEF98226B29D1A00407155 /* Model */,
+				77EEF97D26B2981800407155 /* Components */,
 				7721ACF326ADEBDB003BAA2B /* HomeScreen.swift */,
 			);
 			path = Home;
@@ -177,6 +185,23 @@
 				77B9344526B204AD0034C14B /* ArticleListViewModel.swift */,
 			);
 			path = Article;
+			sourceTree = "<group>";
+		};
+		77EEF97D26B2981800407155 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				77EEF97E26B2982400407155 /* TabBarIcon.swift */,
+				77EEF98026B29A5000407155 /* BottomTabBar.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		77EEF98226B29D1A00407155 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				77EEF98326B29D5200407155 /* HomePage.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,9 +301,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77EEF97F26B2982400407155 /* TabBarIcon.swift in Sources */,
 				7777CA5026B1B2B0000A3A92 /* Toolbar.swift in Sources */,
+				77EEF98126B29A5000407155 /* BottomTabBar.swift in Sources */,
 				77EC228026AD718700802FAB /* ImageView.swift in Sources */,
 				7721ACF426ADEBDB003BAA2B /* HomeScreen.swift in Sources */,
+				77EEF98426B29D5200407155 /* HomePage.swift in Sources */,
 				77B9344126B201C30034C14B /* Dimens.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				77EC228426AD71BC00802FAB /* ImageLoader.swift in Sources */,
