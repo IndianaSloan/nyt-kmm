@@ -27,35 +27,37 @@ struct ArticleListItem: View {
                     Text(article.title).font(Type.Headline1)
                         .padding(PaddingStyles.ArticleHeadline)
                         .fixedSize(horizontal: false, vertical: true)
+                        .foregroundColor(Color.init("ColorPrimary"))
                     Divider()
                     Text(article.description_).font(Type.Body1)
                         .padding(PaddingStyles.ArticleBody)
                         .fixedSize(horizontal: false, vertical: true)
+                        .foregroundColor(Color.init("ColorCaption"))
                 }
             }
             HStack {
                 Text(article.postedDate)
                     .font(.system(.caption))
                     .padding(.all, 4)
-                    .foregroundColor(Color.gray)
+                    .foregroundColor(Color.init("ColorSecondary"))
                 Image(Icons.Bookmarks)
                     .renderingMode(.template)
                     .padding(.all, 4)
-                    .foregroundColor(Color.gray)
+                    .foregroundColor(Color.init("ColorSecondary"))
                     .onTapGesture {
                       
                     }
                 Image(Icons.Share)
                     .renderingMode(.template)
                     .padding(.all, 4)
-                    .foregroundColor(Color.gray)
+                    .foregroundColor(Color.init("ColorSecondary"))
                     .onTapGesture {
                         onSharedTapped()
                     }
             }.frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.trailing, 16)
             .padding(.bottom, 16)
-        }.background(AppColors.ColorSurface)
+        }.background(Color.init("ColorSurface"))
         .cornerRadius(Dimens.RadiusLarge)
         .shadow(radius: Dimens.ArticleElevation)
     }

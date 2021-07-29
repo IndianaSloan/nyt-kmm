@@ -10,7 +10,6 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ArticleListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ArticleListScreen.swift */; };
 		7721ACF426ADEBDB003BAA2B /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7721ACF326ADEBDB003BAA2B /* HomeScreen.swift */; };
-		7777CA4E26B1AE36000A3A92 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7777CA4D26B1AE36000A3A92 /* Color.swift */; };
 		7777CA5026B1B2B0000A3A92 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7777CA4F26B1B2B0000A3A92 /* Toolbar.swift */; };
 		7777CA5626B1B526000A3A92 /* CormorantGaramon-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7777CA5426B1B526000A3A92 /* CormorantGaramon-Regular.ttf */; };
 		7777CA5726B1B526000A3A92 /* CormorantGaramond-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7777CA5526B1B526000A3A92 /* CormorantGaramond-Bold.ttf */; };
@@ -35,7 +34,6 @@
 		7555FF82242A565900829871 /* ArticleListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListScreen.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7721ACF326ADEBDB003BAA2B /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
-		7777CA4D26B1AE36000A3A92 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		7777CA4F26B1B2B0000A3A92 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		7777CA5426B1B526000A3A92 /* CormorantGaramon-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantGaramon-Regular.ttf"; sourceTree = "<group>"; };
 		7777CA5526B1B526000A3A92 /* CormorantGaramond-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantGaramond-Bold.ttf"; sourceTree = "<group>"; };
@@ -118,7 +116,6 @@
 		7719F68626B1A90B00C96584 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
-				7777CA4D26B1AE36000A3A92 /* Color.swift */,
 				77B9344026B201C30034C14B /* Dimens.swift */,
 				77B9343E26B201530034C14B /* Type.swift */,
 				77ACAA7326B2B795007DF48C /* Icons.swift */,
@@ -316,7 +313,6 @@
 				77EC228426AD71BC00802FAB /* ImageLoader.swift in Sources */,
 				7555FF83242A565900829871 /* ArticleListScreen.swift in Sources */,
 				77B9344426B204790034C14B /* ArticleListItem.swift in Sources */,
-				7777CA4E26B1AE36000A3A92 /* Color.swift in Sources */,
 				77B9344626B204AD0034C14B /* ArticleListViewModel.swift in Sources */,
 				77B9343F26B201530034C14B /* Type.swift in Sources */,
 			);

@@ -23,7 +23,7 @@ struct ArticleListScreen: View {
                             }
                     }
                 }
-            }.background(AppColors.ColorBackground)
+            }.background(Color.init("ColorBackground"))
         } else if (uiState.isKind(of: ArticleListState.Loading.self)) {
             Spacer()
             ZStack(alignment: .center){

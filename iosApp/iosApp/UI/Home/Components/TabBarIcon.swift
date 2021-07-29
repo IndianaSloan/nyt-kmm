@@ -28,7 +28,7 @@ struct TabBarIcon: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: width, height: 24)
                 .padding(.top, 10)
-                .foregroundColor(isSelected ? Color.black : Color.gray)
+                .foregroundColor(isSelected ? Color.init("ColorPrimary") : Color.init("ColorSecondary"))
                 
             Spacer()
         }

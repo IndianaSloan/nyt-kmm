@@ -31,6 +31,6 @@ struct BottomTabBar: View {
                     self.onTabClicked(page.route)
                 }
             }
-        }.frame(width: geometry.size.width, height: height).background(AppColors.ColorBackground)
+        }.frame(width: geometry.size.width, height: height).background(Color.init("ColorSurface"))
     }
 }
