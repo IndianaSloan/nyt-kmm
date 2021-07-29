@@ -27,9 +27,9 @@ struct BottomTabBar: View {
             let tabBarWidth = geometry.size.width / CGFloat(tabs.count)
             ForEach(tabs.indices) { index in
                 let page = tabs[index]
-                TabBarIcon(width: tabBarWidth, iconName: page.icon, isSelected: page.selected).onTapGesture(perform: {
+                TabBarIcon(width: tabBarWidth, iconName: page.icon, isSelected: page.selected).onTapGesture {
                     self.onTabClicked(page.route)
-                })
+                }
             }
         }.frame(width: geometry.size.width, height: height).background(AppColors.ColorBackground)
     }

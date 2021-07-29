@@ -15,9 +15,10 @@ struct ArticleListScreen: View {
                                 if (uiModel == (uiState as! ArticleListState.Content).items.last) {
                                     viewModel.onScrolledToLastItem()
                                 }
-                            }.onTapGesture(perform: {
+                            }
+                            .onTapGesture {
                                 print("Clicked \(uiModel.title)")
-                            })
+                            }
                     }
                 }
             }.background(AppColors.ColorBackground)
