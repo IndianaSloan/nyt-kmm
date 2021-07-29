@@ -10,6 +10,7 @@ sealed class Screen(val route: String, val args: List<NamedNavArgument>) {
         "articleList/{$ARGS_SECTION}",
         listOf(navArgument(ARGS_SECTION) { type = NavType.StringType })
     )
+    object SectionList : Screen("sectionList", emptyList())
 }
 
 private const val ARGS_SECTION = "section"

@@ -10,6 +10,7 @@ import com.ciaransloan.nytkmm.android.ui.article.ArticleListScreen
 import com.ciaransloan.nytkmm.android.ui.components.BottomBar
 import com.ciaransloan.nytkmm.android.ui.components.BottomBarItem
 import com.ciaransloan.nytkmm.android.ui.components.NytToolbar
+import com.ciaransloan.nytkmm.android.ui.section.SectionListScreen
 import com.ciaransloan.nytkmm.presentation.section.model.SectionUIModel
 import com.google.gson.Gson
 
@@ -31,6 +32,7 @@ fun Navigation(gson: Gson) {
                     }
                     ArticleListScreen(section)
                 }
+                composable(Screen.SectionList.route) { SectionListScreen() }
             }
         }
     )
@@ -39,5 +41,5 @@ fun Navigation(gson: Gson) {
 val bottomBarItems = listOf(
     BottomBarItem(title = "Top Stories", icon = R.drawable.ic_all, Screen.ArticleList.route),
     BottomBarItem(title = "Bookmarks", icon = R.drawable.ic_bookmark, Screen.ArticleList.route),
-    BottomBarItem(title = "More", icon = R.drawable.ic_menu, Screen.ArticleList.route)
+    BottomBarItem(title = "More", icon = R.drawable.ic_menu, Screen.SectionList.route)
 )
