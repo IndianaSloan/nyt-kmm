@@ -19,15 +19,17 @@ struct ArticleListItem: View {
                     VStack(alignment: .leading) {
                         Text(article.title).font(Type.Headline1)
                             .padding(PaddingStyles.ArticleHeadline)
+                            .fixedSize(horizontal: false, vertical: true)
                         Divider()
                         Text(article.description_).font(Type.Body1)
                             .padding(PaddingStyles.ArticleBody)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
                 HStack {
-                    Text(article.postedDate).padding(.all, 4).foregroundColor(Color.gray)
-                    Image("ic_bookmark").renderingMode(.template).padding(.all, 4).foregroundColor(Color.gray)
-                    Image("ic_share").renderingMode(.template).padding(.all, 4).foregroundColor(Color.gray)
+                    Text(article.postedDate).font(.system(.caption)).padding(.all, 4).foregroundColor(Color.gray)
+                    Image(Icons.Bookmarks).renderingMode(.template).padding(.all, 4).foregroundColor(Color.gray)
+                    Image(Icons.Share).renderingMode(.template).padding(.all, 4).foregroundColor(Color.gray)
                 }.frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing, 16)
                 .padding(.bottom, 16)

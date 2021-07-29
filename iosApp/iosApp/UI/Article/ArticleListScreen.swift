@@ -23,11 +23,14 @@ struct ArticleListScreen: View {
                 }
             }.background(AppColors.ColorBackground)
         } else if (uiState.isKind(of: ArticleListState.Loading.self)) {
+            Spacer()
             ZStack(alignment: .center){
                 ProgressView()
             }
         } else {
-            EmptyView()
+            ZStack {
+                EmptyView()
+            }
         }
     }
 }
