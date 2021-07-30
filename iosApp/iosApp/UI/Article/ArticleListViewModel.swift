@@ -21,7 +21,7 @@ class ArticleListViewModel: ObservableObject {
         stateWatcher = self.stateManager.collectState { [weak self] newState in
             self?.uiState = newState
         }
-        stateManager.getArticles(section: section)
+        stateManager.getArticles(sectionUIModel: section)
     }
     
     deinit {

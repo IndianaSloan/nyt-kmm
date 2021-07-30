@@ -19,15 +19,17 @@ struct HomeScreen: View {
                     Toolbar()
                     let currentRoute = router.currentPage
                     switch currentRoute {
-                    case HomeRoute.Articles:
-                        ArticleListScreenFactory().navigationBarHidden(true)
+                    case HomeRoute.Articles(let sectionUIModel):
+                        ArticleListScreenFactory(section: sectionUIModel).navigationBarHidden(true)
                     case HomeRoute.Bookmarks:
-                        ArticleListScreenFactory().navigationBarHidden(true)
+                        BookmarksListScreen().navigationBarHidden(true)
                     case HomeRoute.Sections:
-                        ArticleListScreenFactory().navigationBarHidden(true)
+                        SectionListScreen { uiModel in
+                            self.router.currentPage = HomeRoute.Articles(uiModel)
+                        }.navigationBarHidden(true)
                     }
-                    
-                    let tabs = [HomePage(route: .Articles, icon: Icons.Home, selected: currentRoute == .Articles),
+                
+                    let tabs = [HomePage(route: .Articles(nil), icon: Icons.Home, selected: currentRoute == .Articles(nil)),
                                 HomePage(route: .Bookmarks, icon: Icons.Bookmarks, selected: currentRoute == .Bookmarks),
                                 HomePage(route: .Sections, icon: Icons.Menu, selected: currentRoute == .Sections)]
                     // Will fill all available white space, forcing BottomTabBar to be pinned to bottom of screen
@@ -42,7 +44,7 @@ struct HomeScreen: View {
 }
 
 class HomeRouter : ObservableObject {
-    @Published var currentPage: HomeRoute = HomeRoute.Articles
+    @Published var currentPage: HomeRoute = HomeRoute.Articles(nil)
 }
 
 struct HomeScreen_Previews: PreviewProvider {

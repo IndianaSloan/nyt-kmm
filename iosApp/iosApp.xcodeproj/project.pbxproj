@@ -18,6 +18,10 @@
 		77B9344126B201C30034C14B /* Dimens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9344026B201C30034C14B /* Dimens.swift */; };
 		77B9344426B204790034C14B /* ArticleListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9344326B204790034C14B /* ArticleListItem.swift */; };
 		77B9344626B204AD0034C14B /* ArticleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9344526B204AD0034C14B /* ArticleListViewModel.swift */; };
+		77E8A7CF26B43AE700D051B6 /* SectionListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E8A7CE26B43AE700D051B6 /* SectionListScreen.swift */; };
+		77E8A7D126B43C3B00D051B6 /* SectionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E8A7D026B43C3B00D051B6 /* SectionListViewModel.swift */; };
+		77E8A7D426B43FC100D051B6 /* SectionListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E8A7D326B43FC100D051B6 /* SectionListItem.swift */; };
+		77E8A7D726B4414300D051B6 /* BookmarksListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E8A7D626B4414300D051B6 /* BookmarksListScreen.swift */; };
 		77EC228026AD718700802FAB /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EC227F26AD718700802FAB /* ImageView.swift */; };
 		77EC228426AD71BC00802FAB /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EC228326AD71BC00802FAB /* ImageLoader.swift */; };
 		77EC228726AD7D3600802FAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77EC228626AD7D3600802FAB /* Assets.xcassets */; };
@@ -42,6 +46,10 @@
 		77B9344026B201C30034C14B /* Dimens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimens.swift; sourceTree = "<group>"; };
 		77B9344326B204790034C14B /* ArticleListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListItem.swift; sourceTree = "<group>"; };
 		77B9344526B204AD0034C14B /* ArticleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListViewModel.swift; sourceTree = "<group>"; };
+		77E8A7CE26B43AE700D051B6 /* SectionListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionListScreen.swift; sourceTree = "<group>"; };
+		77E8A7D026B43C3B00D051B6 /* SectionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionListViewModel.swift; sourceTree = "<group>"; };
+		77E8A7D326B43FC100D051B6 /* SectionListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionListItem.swift; sourceTree = "<group>"; };
+		77E8A7D626B4414300D051B6 /* BookmarksListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksListScreen.swift; sourceTree = "<group>"; };
 		77EC227F26AD718700802FAB /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		77EC228326AD71BC00802FAB /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		77EC228626AD7D3600802FAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -126,9 +134,11 @@
 		7721ACF126ADEBA8003BAA2B /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				77EC228526AD7B6200802FAB /* Article */,
+				77E8A7D526B4413500D051B6 /* Bookmarks */,
 				77EC228126AD71A500802FAB /* Components */,
 				7721ACF226ADEBCB003BAA2B /* Home */,
+				77EC228526AD7B6200802FAB /* Article */,
+				77E8A7CD26B43AC800D051B6 /* Sections */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -158,6 +168,32 @@
 				77B9344326B204790034C14B /* ArticleListItem.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		77E8A7CD26B43AC800D051B6 /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				77E8A7D226B43FB600D051B6 /* Components */,
+				77E8A7CE26B43AE700D051B6 /* SectionListScreen.swift */,
+				77E8A7D026B43C3B00D051B6 /* SectionListViewModel.swift */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
+		77E8A7D226B43FB600D051B6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				77E8A7D326B43FC100D051B6 /* SectionListItem.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		77E8A7D526B4413500D051B6 /* Bookmarks */ = {
+			isa = PBXGroup;
+			children = (
+				77E8A7D626B4414300D051B6 /* BookmarksListScreen.swift */,
+			);
+			path = Bookmarks;
 			sourceTree = "<group>";
 		};
 		77EC228126AD71A500802FAB /* Components */ = {
@@ -303,12 +339,16 @@
 			files = (
 				77EEF97F26B2982400407155 /* TabBarIcon.swift in Sources */,
 				7777CA5026B1B2B0000A3A92 /* Toolbar.swift in Sources */,
+				77E8A7D126B43C3B00D051B6 /* SectionListViewModel.swift in Sources */,
 				77EEF98126B29A5000407155 /* BottomTabBar.swift in Sources */,
 				77EC228026AD718700802FAB /* ImageView.swift in Sources */,
+				77E8A7D426B43FC100D051B6 /* SectionListItem.swift in Sources */,
 				7721ACF426ADEBDB003BAA2B /* HomeScreen.swift in Sources */,
 				77EEF98426B29D5200407155 /* HomePage.swift in Sources */,
 				77B9344126B201C30034C14B /* Dimens.swift in Sources */,
+				77E8A7D726B4414300D051B6 /* BookmarksListScreen.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				77E8A7CF26B43AE700D051B6 /* SectionListScreen.swift in Sources */,
 				77ACAA7426B2B795007DF48C /* Icons.swift in Sources */,
 				77EC228426AD71BC00802FAB /* ImageLoader.swift in Sources */,
 				7555FF83242A565900829871 /* ArticleListScreen.swift in Sources */,
@@ -451,6 +491,14 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-framework",
+					"\"shared\"",
+					"-lsqlite3",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ciaransloan.nytkmm.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -472,6 +520,14 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-framework",
+					"\"shared\"",
+					"-lsqlite3",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ciaransloan.nytkmm.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

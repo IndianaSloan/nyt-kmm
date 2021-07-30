@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import shared
 
 struct HomePage {
     let route: HomeRoute
@@ -14,8 +15,8 @@ struct HomePage {
     let selected: Bool
 }
 
-enum HomeRoute {
-    case Articles
+enum HomeRoute : Equatable {
+    case Articles(SectionUIModel?)
     case Bookmarks
     case Sections
 }
