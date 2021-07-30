@@ -4,7 +4,8 @@ CREATE TABLE bookmark (
     description TEXT NOT NULL,
     postedDate INTEGER NOT NULL,
     webUrl TEXT NOT NULL,
-    thumbnailUrl TEXT
+    thumbnailUrl TEXT,
+    PRIMARY KEY (id)
 );
 
 selectAll:
