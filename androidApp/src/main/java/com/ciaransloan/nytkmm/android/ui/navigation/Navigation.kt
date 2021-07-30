@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ciaransloan.nytkmm.android.R
 import com.ciaransloan.nytkmm.android.ui.article.ArticleListScreen
+import com.ciaransloan.nytkmm.android.ui.bookmarks.BookmarksScreen
 import com.ciaransloan.nytkmm.android.ui.components.BottomBar
 import com.ciaransloan.nytkmm.android.ui.components.BottomBarItem
 import com.ciaransloan.nytkmm.android.ui.components.NytToolbar
@@ -51,6 +52,10 @@ fun Navigation(gson: Gson) {
                         navController.navigate("articleList/$args")
                     }
                 }
+                composable(Screen.Bookmarks.route) {
+                    showBackArrow.value = false
+                    BookmarksScreen()
+                }
             }
         }
     )
@@ -58,6 +63,6 @@ fun Navigation(gson: Gson) {
 
 val BottomBarItems = listOf(
     BottomBarItem(title = "Top Stories", icon = R.drawable.ic_all, Screen.ArticleList.route),
-    BottomBarItem(title = "Bookmarks", icon = R.drawable.ic_bookmark, Screen.ArticleList.route),
+    BottomBarItem(title = "Bookmarks", icon = R.drawable.ic_bookmark, Screen.Bookmarks.route),
     BottomBarItem(title = "More", icon = R.drawable.ic_menu, Screen.SectionList.route)
 )

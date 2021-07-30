@@ -1,7 +1,6 @@
 package com.ciaransloan.nytkmm.android.ui.article
 
 import android.content.Intent
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -56,7 +55,7 @@ fun ArticleListScreen(section: SectionUIModel? = null) {
     ArticleList(
         items = data,
         onClicked = { Toast.makeText(context, it.title, Toast.LENGTH_SHORT).show() },
-        onBookmarkClicked = { },
+        onBookmarkClicked = { viewModel.onBookmarkTapped(it) },
         onShareClicked = { webUrl ->
             Intent(Intent.ACTION_SEND).apply {
                 putExtra(Intent.EXTRA_TEXT, webUrl)

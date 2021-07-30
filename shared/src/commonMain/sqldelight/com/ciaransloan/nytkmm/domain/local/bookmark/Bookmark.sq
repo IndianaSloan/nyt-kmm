@@ -1,0 +1,27 @@
+CREATE TABLE bookmark (
+    id TEXT NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    postedDate INTEGER NOT NULL,
+    webUrl TEXT NOT NULL,
+    thumbnailUrl TEXT
+);
+
+selectAll:
+SELECT *
+FROM bookmark;
+
+insertBookmark:
+INSERT OR REPLACE
+INTO bookmark(
+    id,
+    title,
+    description,
+    postedDate,
+    webUrl,
+    thumbnailUrl
+) VALUES (?, ?, ?, ?, ?, ?);
+
+removeBookmark:
+DELETE FROM
+bookmark WHERE id == :id;

@@ -1,5 +1,8 @@
 package com.ciaransloan.nytkmm.presentation.article
 
+import com.ciaransloan.nytkmm.datasource.cache.NytDatabase
+import com.ciaransloan.nytkmm.domain.local.bookmark.BookmarkDao
+import com.ciaransloan.nytkmm.domain.local.bookmark.BookmarkDaoContract
 import com.ciaransloan.nytkmm.domain.repository.NytRepositoryContract
 import com.ciaransloan.nytkmm.domain.repository.base.model.Page
 import com.ciaransloan.nytkmm.domain.repository.base.onError
@@ -14,12 +17,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class ArticleStateManager : BaseStateManager(), KoinComponent {
+class ArticleStateManager(database: NytDatabase) : BaseStateManager(), KoinComponent {
 
     private val repository by inject<NytRepositoryContract>()
     private val uiMapper by inject<ArticleUIMapper>()
     private val sectionUiMapper by inject<SectionUIMapper>()
     private val uiState = MutableStateFlow<ArticleListState>(ArticleListState.Empty)
+
+    private val bookmarkDao: BookmarkDaoContract = BookmarkDao(database)
 
     private lateinit var currentPage: Page<Article>
     private val loadedPages = mutableListOf<Page<Article>>()
@@ -30,7 +35,9 @@ class ArticleStateManager : BaseStateManager(), KoinComponent {
         uiState.value = ArticleListState.Loading
         val section = sectionUiMapper.mapSectionUIModel(sectionUIModel)
         repository.getArticlePage(section = section)
-            .onSuccess { page -> handlePageResult(page) }
+            .onSuccess { page ->
+                handlePageResult(page)
+            }
             .onError { error -> println("ERROR - ${error.message}") }
     }
 
@@ -42,6 +49,24 @@ class ArticleStateManager : BaseStateManager(), KoinComponent {
                     .onError { error -> println("ERROR - ${error.message}") }
             }
         }
+    }
+
+    fun save(articleId: String) {
+        loadedPages.flatMap { it.items }.find { it.id == articleId }?.let {
+            println("SAVING BOOKMARK")
+            bookmarkDao.insert(it)
+        }
+    }
+
+    fun remove(articleId: String) {
+        bookmarkDao.remove(articleId)
+    }
+
+    fun getBookmarks() {
+        val ids = bookmarkDao.getBookmarkIds()
+        println("============================")
+        println("GOT ${ids.count()} BOOKMARKS")
+        println("============================")
     }
 
     private fun handlePageResult(page: Page<Article>) {

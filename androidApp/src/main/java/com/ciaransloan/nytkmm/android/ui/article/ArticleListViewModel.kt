@@ -2,6 +2,7 @@ package com.ciaransloan.nytkmm.android.ui.article
 
 import androidx.lifecycle.ViewModel
 import com.ciaransloan.nytkmm.presentation.article.ArticleStateManager
+import com.ciaransloan.nytkmm.presentation.article.model.ArticleUIModel
 import com.ciaransloan.nytkmm.presentation.section.model.SectionUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -17,4 +18,11 @@ class ArticleListViewModel
     }
 
     fun onPageScrolledToEnd() = stateManager.loadNextPage()
+
+    fun onBookmarkTapped(item: ArticleUIModel) {
+        when (item.isFavorite) {
+            true -> stateManager.save(item.id)
+            false -> stateManager.remove(item.id)
+        }
+    }
 }

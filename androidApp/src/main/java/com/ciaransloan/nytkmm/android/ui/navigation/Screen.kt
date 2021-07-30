@@ -11,6 +11,7 @@ sealed class Screen(val route: String, val args: List<NamedNavArgument>) {
         listOf(navArgument(ARGS_SECTION) { type = NavType.StringType })
     )
     object SectionList : Screen("sectionList", emptyList())
+    object Bookmarks : Screen("bookmarks", emptyList())
 }
 
 private const val ARGS_SECTION = "section"
