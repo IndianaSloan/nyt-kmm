@@ -12,11 +12,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct iOSApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    let database: NytDatabase = PersistenceModule().database
     
 	var body: some Scene {
 		WindowGroup {
-            HomeScreen(database: database)
+            HomeScreen()
 		}
 	}
 }

@@ -54,6 +54,6 @@ struct PaddingStyles {
 
 // Used to Create a new instance of ArticleListScreen while initializing its ViewModel
 // with the passed in Section
-public func ArticleListScreenFactory(section: SectionUIModel? = nil, database: NytDatabase) -> some View {
-    ArticleListScreen(viewModel: .init(section, database))
+public func ArticleListScreenFactory(section: SectionUIModel? = nil) -> some View {
+    ArticleListScreen(viewModel: .init(section))
 }

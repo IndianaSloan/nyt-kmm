@@ -11,7 +11,6 @@ import shared
 
 struct HomeScreen: View {
     @StateObject var router: HomeRouter = HomeRouter()
-    var database: NytDatabase
     
     var body: some View {
         NavigationView {
@@ -21,7 +20,7 @@ struct HomeScreen: View {
                     let currentRoute = router.currentPage
                     switch currentRoute {
                     case HomeRoute.Articles(let sectionUIModel):
-                        ArticleListScreenFactory(section: sectionUIModel, database: database).navigationBarHidden(true)
+                        ArticleListScreenFactory(section: sectionUIModel).navigationBarHidden(true)
                     case HomeRoute.Bookmarks:
                         BookmarksListScreen().navigationBarHidden(true)
                     case HomeRoute.Sections:

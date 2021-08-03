@@ -15,9 +15,9 @@ class ArticleListViewModel: ObservableObject {
     var stateWatcher: Closeable?
     var section: SectionUIModel?
     
-    init(_ section: SectionUIModel? = nil, _ database: NytDatabase) {
+    init(_ section: SectionUIModel? = nil) {
         self.section = section
-        self.stateManager = ArticleStateManager(database: database)
+        self.stateManager = ArticleStateManager(database: AppDatabase.shared())
         uiState = ArticleListState.Empty()
         stateWatcher = self.stateManager.collectState { [weak self] newState in
             self?.uiState = newState
