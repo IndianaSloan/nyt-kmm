@@ -10,10 +10,9 @@ import Foundation
 import shared
 
 class AppDatabase {
-    
-    private let persistenceModule: PersistenceModule = PersistenceModule()
-    
+        
     private static var sharedDatabase: NytDatabase = {
+        let persistenceModule = PersistenceModule()
         return persistenceModule.database
     }()
     
