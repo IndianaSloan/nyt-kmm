@@ -11,6 +11,7 @@ import shared
 
 struct HomeScreen: View {
     @StateObject var router: HomeRouter = HomeRouter()
+    var database: NytDatabase
     
     var body: some View {
         NavigationView {
@@ -20,7 +21,7 @@ struct HomeScreen: View {
                     let currentRoute = router.currentPage
                     switch currentRoute {
                     case HomeRoute.Articles(let sectionUIModel):
-                        ArticleListScreenFactory(section: sectionUIModel).navigationBarHidden(true)
+                        ArticleListScreenFactory(section: sectionUIModel, database: database).navigationBarHidden(true)
                     case HomeRoute.Bookmarks:
                         BookmarksListScreen().navigationBarHidden(true)
                     case HomeRoute.Sections:
@@ -45,10 +46,4 @@ struct HomeScreen: View {
 
 class HomeRouter : ObservableObject {
     @Published var currentPage: HomeRoute = HomeRoute.Articles(nil)
-}
-
-struct HomeScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeScreen()
-    }
 }

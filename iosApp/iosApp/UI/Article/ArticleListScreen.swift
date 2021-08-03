@@ -9,18 +9,20 @@ struct ArticleListScreen: View {
             ScrollView {
                 LazyVStack {
                     ForEach((uiState as! ArticleListState.Content).items, id: \.self) { uiModel in
-                        ArticleListItem(uiModel: uiModel, onShareTap: {
-                            shareContent(webUrl: uiModel.webUrl)
-                        })
-                            .padding(PaddingStyles.ArticleListItem)
-                            .onAppear {
-                                if (uiModel == (uiState as! ArticleListState.Content).items.last) {
-                                    viewModel.onScrolledToLastItem()
-                                }
+                        ArticleListItem(
+                            uiModel: uiModel,
+                            onBookmarkTap: { viewModel.onBookmarkTapped(article: uiModel) },
+                            onShareTap: { shareContent(webUrl: uiModel.webUrl) }
+                        )
+                        .padding(PaddingStyles.ArticleListItem)
+                        .onAppear {
+                            if (uiModel == (uiState as! ArticleListState.Content).items.last) {
+                                viewModel.onScrolledToLastItem()
                             }
-                            .onTapGesture {
-                                print("Clicked \(uiModel.title)")
-                            }
+                        }
+                        .onTapGesture {
+                            print("Clicked \(uiModel.title)")
+                        }
                     }
                 }
             }.background(Color.init("ColorBackground"))
@@ -52,6 +54,6 @@ struct PaddingStyles {
 
 // Used to Create a new instance of ArticleListScreen while initializing its ViewModel
 // with the passed in Section
-public func ArticleListScreenFactory(section: SectionUIModel? = nil) -> some View {
-    ArticleListScreen(viewModel: .init(section))
+public func ArticleListScreenFactory(section: SectionUIModel? = nil, database: NytDatabase) -> some View {
+    ArticleListScreen(viewModel: .init(section, database))
 }

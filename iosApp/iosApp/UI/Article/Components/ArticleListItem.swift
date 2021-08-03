@@ -12,12 +12,19 @@ import shared
 struct ArticleListItem: View {
     
     let article: ArticleUIModel
+    let onBookmarkTapped: () -> Void
     let onSharedTapped: () -> Void
+    var bookmarkColor = Color.init("ColorSecondary")
     
-    init(uiModel: ArticleUIModel, onShareTap: @escaping () -> Void) {
+    init(uiModel: ArticleUIModel, onBookmarkTap: @escaping () -> Void, onShareTap: @escaping () -> Void) {
         self.article = uiModel
+        self.onBookmarkTapped = onBookmarkTap
         self.onSharedTapped = onShareTap
+        if (article.isFavorite) {
+            bookmarkColor = Color.init("ColorPrimary")
+        }
     }
+    
     var body: some View {
         VStack {
             HStack(alignment: .center) {
@@ -43,9 +50,9 @@ struct ArticleListItem: View {
                 Image(Icons.Bookmarks)
                     .renderingMode(.template)
                     .padding(.all, 4)
-                    .foregroundColor(Color.init("ColorSecondary"))
+                    .foregroundColor(bookmarkColor)
                     .onTapGesture {
-                      
+                      onBookmarkTapped()
                     }
                 Image(Icons.Share)
                     .renderingMode(.template)
