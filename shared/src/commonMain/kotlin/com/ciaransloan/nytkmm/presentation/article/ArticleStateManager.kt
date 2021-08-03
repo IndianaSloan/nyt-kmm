@@ -16,10 +16,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.koin.core.parameter.parametersOf
 
 class ArticleStateManager(database: NytDatabase) : BaseStateManager(), KoinComponent {
 
-    private val repository by inject<NytRepositoryContract>()
+    private val repository by inject<NytRepositoryContract>(parameters = { parametersOf(database) })
     private val uiMapper by inject<ArticleUIMapper>()
     private val sectionUiMapper by inject<SectionUIMapper>()
     private val uiState = MutableStateFlow<ArticleListState>(ArticleListState.Empty)
@@ -27,7 +28,7 @@ class ArticleStateManager(database: NytDatabase) : BaseStateManager(), KoinCompo
     private val bookmarkDao: BookmarkDaoContract = BookmarkDao(database)
 
     private lateinit var currentPage: Page<Article>
-    private val loadedPages = mutableListOf<Page<Article>>()
+    private val loadedItems = mutableListOf<Article>()
 
     fun observeState() = uiState.asStateFlow()
 
@@ -35,9 +36,7 @@ class ArticleStateManager(database: NytDatabase) : BaseStateManager(), KoinCompo
         uiState.value = ArticleListState.Loading
         val section = sectionUiMapper.mapSectionUIModel(sectionUIModel)
         repository.getArticlePage(section = section)
-            .onSuccess { page ->
-                handlePageResult(page)
-            }
+            .onSuccess { page -> handlePageResult(page) }
             .onError { error -> println("ERROR - ${error.message}") }
     }
 
@@ -51,15 +50,28 @@ class ArticleStateManager(database: NytDatabase) : BaseStateManager(), KoinCompo
         }
     }
 
-    fun save(articleId: String) {
-        loadedPages.flatMap { it.items }.find { it.id == articleId }?.let {
-            println("SAVING BOOKMARK")
-            bookmarkDao.insert(it)
+    fun bookmarkArticle(articleId: String) {
+        when (val articleIndex = loadedItems.indexOfFirst { it.id == articleId }) {
+            NO_INDEX -> println("CANT FIND ARTICLE IN LOADED ITEMS")
+            else -> {
+                println("SAVING BOOKMARK")
+                val updatedArticle = loadedItems[articleIndex].copy(isFavorite = true)
+                bookmarkDao.insert(updatedArticle)
+                replaceArticle(updatedArticle, articleIndex)
+            }
         }
     }
 
-    fun remove(articleId: String) {
-        bookmarkDao.remove(articleId)
+    fun unBookmarkArticle(articleId: String) {
+        when (val articleIndex = loadedItems.indexOfFirst { it.id == articleId }) {
+            NO_INDEX -> println("CANT FIND ARTICLE IN LOADED ITEMS")
+            else -> {
+                println("REMOVING BOOKMARK")
+                val updatedArticle = loadedItems[articleIndex].copy(isFavorite = false)
+                bookmarkDao.remove(articleId)
+                replaceArticle(updatedArticle, articleIndex)
+            }
+        }
     }
 
     fun getBookmarks() {
@@ -71,8 +83,17 @@ class ArticleStateManager(database: NytDatabase) : BaseStateManager(), KoinCompo
 
     private fun handlePageResult(page: Page<Article>) {
         currentPage = page
-        loadedPages.add(page)
-        val articles = loadedPages.flatMap { it.items }
-        uiState.value = uiMapper.map(articles, page)
+        loadedItems.addAll(page.items)
+        uiState.value = uiMapper.map(loadedItems, page)
+    }
+
+    private fun replaceArticle(article: Article, index: Int) {
+        with(loadedItems) {
+            removeAt(index)
+            add(index, article)
+        }
+        handlePageResult(currentPage)
     }
 }
+
+private const val NO_INDEX = -1

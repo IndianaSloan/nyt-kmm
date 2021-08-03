@@ -11,7 +11,6 @@ class NytApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
         initKoin {
             androidContext(this@NytApplication)
             androidLogger()

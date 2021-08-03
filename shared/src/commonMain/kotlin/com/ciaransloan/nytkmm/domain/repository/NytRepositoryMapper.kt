@@ -18,7 +18,7 @@ internal class NytRepositoryMapper : BaseMapper() {
         }
     }
 
-    fun mapArticles(items: List<ArticleApiModel>): List<Article> {
+    fun mapArticles(items: List<ArticleApiModel>, bookmarkIds: List<String>): List<Article> {
         return items.mapNotNull { apiModel ->
             val imageUrl =
                 apiModel.multimedia?.firstOrNull { it.format == "Normal" && it.type == "image" }?.url
@@ -30,7 +30,7 @@ internal class NytRepositoryMapper : BaseMapper() {
                     ?: return@mapNotNull null,
                 thumbnailUrl = imageUrl ?: apiModel.thumbnailUrl,
                 webUrl = apiModel.url ?: return@mapNotNull null,
-                isFavorite = false
+                isFavorite = bookmarkIds.contains(apiModel.id)
             )
         }
     }

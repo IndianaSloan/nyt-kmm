@@ -43,6 +43,27 @@ internal class RepositoryResult<T> private constructor() {
     }
 }
 
+/**
+ * If the context RepositoryResult is a success, map T into R, otherwise just propagate the error
+ */
+internal suspend fun <T, R> RepositoryResult<T>.flatMapSuspend(mapper: suspend (T) -> RepositoryResult<R>): RepositoryResult<R> {
+    val (data, error) = this
+    return data
+        ?.let {
+            try {
+                mapper(it)
+            } catch (t: Throwable) {
+                RepositoryResult.error(
+                    RepositoryError.fromException(
+                        t,
+                        "Something went wrong. Please try again."
+                    )
+                )
+            }
+        }
+        ?: run { RepositoryResult.error(error!!) }
+}
+
 internal fun <T> RepositoryResult<T>.onSuccess(block: (T) -> Unit): RepositoryResult<T> {
     val (success, _) = this
     success?.let { block(it) }

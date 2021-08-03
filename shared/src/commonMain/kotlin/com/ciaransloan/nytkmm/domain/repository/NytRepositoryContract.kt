@@ -13,4 +13,6 @@ internal interface NytRepositoryContract {
         page: Int = 1,
         section: NewsSection
     ): RepositoryResult<Page<Article>>
+
+    suspend fun getBookmarkIds(): RepositoryResult<List<String>>
 }

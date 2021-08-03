@@ -1,5 +1,6 @@
 package com.ciaransloan.nytkmm.di
 
+import com.ciaransloan.nytkmm.datasource.cache.NytDatabase
 import com.ciaransloan.nytkmm.domain.ApiClient
 import com.ciaransloan.nytkmm.domain.remote.NytApi
 import com.ciaransloan.nytkmm.domain.repository.NytRepository
@@ -21,7 +22,9 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
 fun initKoin() = initKoin {}
 
 private val repositoryModule = module {
-    single<NytRepositoryContract> { NytRepository(get(), get(), get()) }
+    single<NytRepositoryContract> { (database: NytDatabase) ->
+        NytRepository(get(), get(), get(), database)
+    }
 
     factory { PagingRepositoryHelper() }
     factory { NytRepositoryMapper() }

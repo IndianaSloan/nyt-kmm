@@ -21,8 +21,8 @@ class ArticleListViewModel
 
     fun onBookmarkTapped(item: ArticleUIModel) {
         when (item.isFavorite) {
-            true -> stateManager.save(item.id)
-            false -> stateManager.remove(item.id)
+            true -> stateManager.unBookmarkArticle(item.id)
+            false -> stateManager.bookmarkArticle(item.id)
         }
     }
 }
