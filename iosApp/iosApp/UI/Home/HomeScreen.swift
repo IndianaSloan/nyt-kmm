@@ -22,7 +22,7 @@ struct HomeScreen: View {
                     case HomeRoute.Articles(let sectionUIModel):
                         ArticleListScreenFactory(section: sectionUIModel).navigationBarHidden(true)
                     case HomeRoute.Bookmarks:
-                        BookmarksListScreen().navigationBarHidden(true)
+                        BookmarkListScreenFactory().navigationBarHidden(true)
                     case HomeRoute.Sections:
                         SectionListScreen { uiModel in
                             self.router.currentPage = HomeRoute.Articles(uiModel)

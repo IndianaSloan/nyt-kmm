@@ -7,16 +7,51 @@
 //
 
 import SwiftUI
+import shared
 
 struct BookmarksListScreen: View {
+    
+    @StateObject var viewModel: BookmarksListViewModel
+    
     var body: some View {
-        Spacer()
-        Text("Coming Soon!")
+        let uiState = viewModel.uiState
+        if (uiState.isKind(of: BookmarkListState.Content.self)) {
+            ScrollView {
+                LazyVStack {
+                    ForEach((uiState as! BookmarkListState.Content).items, id: \.self) { uiModel in
+                        BookmarkListItem(uiModel: uiModel, onRemovedTapped: {
+                            viewModel.onRemovedClicked(article: uiModel)
+                        }, onShareTap: {
+                            shareContent(webUrl: uiModel.webUrl)
+                        })
+                        .padding(PaddingStyles.ArticleListItem)
+                        .onTapGesture {
+                            print("Clicked \(uiModel.title)")
+                        }
+                    }
+                }
+            }.background(Color.init("ColorBackground"))
+        } else if (uiState.isKind(of: ArticleListState.Loading.self)) {
+            Spacer()
+            ZStack(alignment: .center){
+                ProgressView()
+            }
+        } else {
+            ZStack {
+                EmptyView()
+            }
+        }
+    }
+    
+    func shareContent(webUrl: String) {
+        guard let data = URL(string: webUrl) else { return }
+        let av = UIActivityViewController(activityItems: [data], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
 }
 
-struct BookmarksListScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        BookmarksListScreen()
-    }
+
+// Used to Create a new instance of BookmarkListScreen while initializing its ViewModel
+public func BookmarkListScreenFactory() -> some View {
+    BookmarksListScreen(viewModel: .init())
 }
