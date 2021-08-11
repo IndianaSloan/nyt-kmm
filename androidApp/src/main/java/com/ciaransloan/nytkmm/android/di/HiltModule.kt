@@ -4,6 +4,7 @@ import android.content.Context
 import com.ciaransloan.nytkmm.android.app.NytApplication
 import com.ciaransloan.nytkmm.datasource.cache.NytDatabase
 import com.ciaransloan.nytkmm.presentation.article.ArticleStateManager
+import com.ciaransloan.nytkmm.presentation.bookmark.BookmarkStateManager
 import com.ciaransloan.nytkmm.presentation.section.SectionListStateManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -34,4 +35,7 @@ object AppModule {
 
     @Provides
     fun provideSectionListStateManager(): SectionListStateManager = SectionListStateManager()
+
+    @Provides
+    fun provideBookmarkStateManager(database: NytDatabase): BookmarkStateManager = BookmarkStateManager(database)
 }

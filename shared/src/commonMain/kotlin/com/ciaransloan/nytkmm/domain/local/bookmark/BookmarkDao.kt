@@ -2,7 +2,7 @@ package com.ciaransloan.nytkmm.domain.local.bookmark
 
 import com.ciaransloan.nytkmm.datasource.cache.NytDatabase
 import com.ciaransloan.nytkmm.domain.repository.model.Article
-import kotlinx.datetime.LocalDate
+import kotlinx.datetime.*
 
 internal class BookmarkDao(
     database: NytDatabase,
@@ -16,7 +16,8 @@ internal class BookmarkDao(
             id = article.id,
             title = article.title,
             description = article.description,
-            postedDate = 0L, //TODO
+            postedDate = article.postedDate.atStartOfDayIn(TimeZone.currentSystemDefault())
+                .toEpochMilliseconds(),
             webUrl = article.webUrl,
             thumbnailUrl = article.thumbnailUrl
         )
