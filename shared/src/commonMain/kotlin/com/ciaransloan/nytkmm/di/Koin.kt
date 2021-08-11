@@ -8,6 +8,7 @@ import com.ciaransloan.nytkmm.domain.repository.NytRepositoryContract
 import com.ciaransloan.nytkmm.domain.repository.NytRepositoryMapper
 import com.ciaransloan.nytkmm.domain.repository.base.PagingRepositoryHelper
 import com.ciaransloan.nytkmm.presentation.article.ArticleUIMapper
+import com.ciaransloan.nytkmm.presentation.bookmark.BookmarkUIMapper
 import com.ciaransloan.nytkmm.presentation.section.SectionUIMapper
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
@@ -37,4 +38,5 @@ private val apiModule = module {
 private val presentationModule = module {
     factory { ArticleUIMapper() }
     factory { SectionUIMapper() }
+    factory { BookmarkUIMapper() }
 }
